@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "CaVuoAAElb8na1zj4GcGksoHy2ySPWbQdZyiuQ7h0ds=",
+  "Source": "ApiAtencionDomiciliaria",
+  "BasePath": "_content/ApiAtencionDomiciliaria",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "ApiAtencionDomiciliaria\\wwwroot",
+      "Source": "ApiAtencionDomiciliaria",
+      "ContentRoot": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\wwwroot\\",
+      "BasePath": "_content/ApiAtencionDomiciliaria",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
