@@ -26,7 +26,7 @@ public class PacientesController : ControllerBase
         try
         {
             var usuario = User.Identity.Name;
-            var res = await _context.Visita.Include(x=> x.Paciente).Where(x=> x.Enfermero.Email == usuario).ToListAsync();
+            var res = await _context.Visita.Include(x=> x.Paciente).Where(x=> x.Enfermero.Email == usuario).Select(x=> x.Paciente).ToListAsync();
             return Ok(res);
         }
         catch (Exception ex)

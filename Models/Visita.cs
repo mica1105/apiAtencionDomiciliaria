@@ -17,20 +17,20 @@ public class Visita
 	public DateOnly FechaAtencion { get; set; } 
 	[Required]
 	[DataType(DataType.Time)]
-	public TimeOnly HoraInicio { get; set; }
+	public TimeOnly InicioAtencion { get; set; }
     [Required]
 	[DataType(DataType.Time)]
-	public TimeOnly HoraFin { get; set; }
+	public TimeOnly FinAtencion { get; set; }
 	[Required]
 	public bool Estado {get; set;}
     [DataType(DataType.Date)]
-	public DateOnly FechaRegistro { get; set; } 
+	public DateOnly FechaCreacion { get; set; } 
 	[DataType(DataType.Date)]
 	public DateOnly FechaModificacion { get; set; }
     public int PacienteId { get; set; }
 	[ForeignKey("PacienteId")]
-    public Paciente Paciente { get; set; }
+    public Paciente? Paciente { get; set; }
     public int EnfermeroId { get; set; }
 	[ForeignKey("EnfermeroId")]
-    public Enfermero Enfermero { get; set; }
+    public Enfermero? Enfermero { get; set; }
 }

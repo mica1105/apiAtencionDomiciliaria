@@ -23,7 +23,7 @@ public class Paciente
 	public DateOnly FechaNacimiento { get; set; } 
 	[Required]
 	public string Domicilio { get; set; } = "";
-    public string? Telefono { get; set; }
+    public long Telefono { get; set; }
 	[DataType(DataType.Date)]
 	public DateOnly FechaRegistro { get; set; } 
 	[DataType(DataType.Date)]

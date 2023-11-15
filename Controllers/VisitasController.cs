@@ -76,7 +76,7 @@ public class VisitasController : ControllerBase
                 var visita = _context.Visita.AsNoTracking().Where(x => x.Enfermero.Email == User.Identity.Name && x.Id == id).First();
                 _context.Visita.Remove(visita);
                 await _context.SaveChangesAsync();
-                return Ok();    
+                return Ok("Visita "+ id +" eliminada");    
             }
             return BadRequest(ModelState);
         }

@@ -12,17 +12,17 @@ public class HC
 		
 	[Key]
 	public int Id { get; set; }
-    public string Diagnostico { get; set; }
-    public string Medicacion { get; set; }
+    public string Diagnostico { get; set; }="";
+    public string Medicacion { get; set; }="";
     public bool Fuma { get; set; }
     public bool Bebe { get; set; }
     public bool Drogas { get; set; }
     public bool Dbt { get; set; }
     public bool Hta { get; set; }
-    public string Alergias { get; set; }
-    public string Traumas { get; set; }
-    public string Cirugias { get; set; }
+    public string Alergias { get; set; }="";
+    public string Traumas { get; set; }="";
+    public string Cirugias { get; set; }="";
     public int PacienteId { get; set; }
     [ForeignKey("PacienteId")]
-    public Paciente Paciente { get; set; }
+    public Paciente? Paciente { get; set; }
 }
