@@ -7,40 +7,32 @@ using System.Threading.Tasks;
 
 namespace ApiAtencionDomiciliaria;
 
-public class Enfermero
+public class Paciente
 {
 		
 	[Key]
 	[Display(Name = "Código")]
-	public int Id { get; set; }
-		
+	public int Id { get; set; }	
 	[Required]
-	public string Nombre { get; set; }  = "";
-		
+	public string Nombre { get; set; }  = "";	
 	[Required]
-	public string Apellido { get; set; } = "";
-		
+	public string Apellido { get; set; } = "";	
 	[Required]
 	public int Dni { get; set; }
-
-	public string? Telefono { get; set; }
+    [DataType(DataType.Date)]
+	public DateOnly FechaNacimiento { get; set; } 
 	[Required]
 	public string Domicilio { get; set; } = "";
-
-	[Required, EmailAddress]
-	public string Email { get; set; } = "";
-	
-	[Required, DataType(DataType.Password)]
-	public string Password { get; set; } = "";
+    public string? Telefono { get; set; }
 	[DataType(DataType.Date)]
 	public DateOnly FechaRegistro { get; set; } 
 	[DataType(DataType.Date)]
 	public DateOnly FechaModificacion { get; set; }
-	public string Avatar { get; set; }= "";
-	[NotMapped]
-	public IFormFile? AvatarFile { get; set; }
 	public int EstadoId { get; set; }
 	[ForeignKey("EstadoId")]
 	public Estado? Estado {get; set;}
+
+    public int CalcularEdad(){
+		return DateOnly.FromDateTime(DateTime.Now).Year - FechaNacimiento.Year;
+    }
 }
-        

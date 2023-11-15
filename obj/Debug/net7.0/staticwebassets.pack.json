@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\wwwroot\\Uploads\\enfermero6.jpeg",
+      "PackagePath": "staticwebassets\\Uploads\\enfermero6.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\wwwroot\\Uploads\\enfermero7.jpeg",
+      "PackagePath": "staticwebassets\\Uploads\\enfermero7.jpeg"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.ApiAtencionDomiciliaria.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.ApiAtencionDomiciliaria.props",
+      "PackagePath": "build\\ApiAtencionDomiciliaria.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.ApiAtencionDomiciliaria.props",
+      "PackagePath": "buildMultiTargeting\\ApiAtencionDomiciliaria.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.ApiAtencionDomiciliaria.props",
+      "PackagePath": "buildTransitive\\ApiAtencionDomiciliaria.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
