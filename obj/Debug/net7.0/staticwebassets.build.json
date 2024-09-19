@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eHI3mcpq1TgZrKxCRWqJd5J9MNyUQoyJZFvUBikBtEc=",
+  "Hash": "3OGmUj4ojoLBzCbRWcxMBi/Gw4KdWA4k9+B5c8np9lY=",
   "Source": "ApiAtencionDomiciliaria",
   "BasePath": "_content/ApiAtencionDomiciliaria",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "ApiAtencionDomiciliaria\\wwwroot",
       "Source": "ApiAtencionDomiciliaria",
-      "ContentRoot": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\",
       "BasePath": "_content/ApiAtencionDomiciliaria",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\wwwroot\\Uploads\\enfermero6.jpeg",
+      "Identity": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\Uploads\\enfermero6.jpeg",
       "SourceId": "ApiAtencionDomiciliaria",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\",
       "BasePath": "_content/ApiAtencionDomiciliaria",
       "RelativePath": "Uploads/enfermero6.jpeg",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\enfermero6.jpeg"
     },
     {
-      "Identity": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\wwwroot\\Uploads\\enfermero7.jpeg",
+      "Identity": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\Uploads\\enfermero7.jpeg",
       "SourceId": "ApiAtencionDomiciliaria",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\",
       "BasePath": "_content/ApiAtencionDomiciliaria",
       "RelativePath": "Uploads/enfermero7.jpeg",
       "AssetKind": "All",

@@ -37,7 +37,6 @@ public class EnfermerosController : ControllerBase
 						numBytesRequested: 256 / 8
 					));
                 enfermero.Password=hashed;
-                enfermero.FechaRegistro= DateOnly.FromDateTime(DateTime.Now);
                 await _context.Enfermero.AddAsync(enfermero);
                 _context.SaveChanges();
                 if(enfermero.AvatarFile!=null && enfermero.Id !=0){
@@ -52,7 +51,6 @@ public class EnfermerosController : ControllerBase
                         await enfermero.AvatarFile.CopyToAsync(fileStream);
                     }
                     enfermero.Avatar=Path.Combine("/Uploads", fileName);
-                    enfermero.FechaModificacion= DateOnly.FromDateTime(DateTime.Now);
                     _context.Enfermero.Update(enfermero);
                     await _context.SaveChangesAsync();
                     
@@ -141,7 +139,6 @@ public class EnfermerosController : ControllerBase
                 enfermero.Id= usuario.Id;
                 enfermero.Email= usuario.Email;
                 enfermero.Password= usuario.Password;
-                enfermero.FechaModificacion=  DateOnly.FromDateTime(DateTime.Now);
                 _context.Enfermero.Update(enfermero);
                 await _context.SaveChangesAsync();
                 return Ok(enfermero);
@@ -176,7 +173,6 @@ public class EnfermerosController : ControllerBase
                     numBytesRequested:256/8
                 ));
                 usuario.Password= hashed;
-                usuario.FechaModificacion= DateOnly.FromDateTime(DateTime.Now);
                 _context.Enfermero.Update(usuario);
                 await _context.SaveChangesAsync();
                 var key = new SymmetricSecurityKey(

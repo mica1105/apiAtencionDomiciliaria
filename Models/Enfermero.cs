@@ -32,10 +32,6 @@ public class Enfermero
 	
 	[Required, DataType(DataType.Password)]
 	public string Password { get; set; } = "";
-	[DataType(DataType.Date)]
-	public DateOnly FechaRegistro { get; set; } 
-	[DataType(DataType.Date)]
-	public DateOnly FechaModificacion { get; set; }
 	public string Avatar { get; set; }= "";
 	[NotMapped]
 	public IFormFile? AvatarFile { get; set; }

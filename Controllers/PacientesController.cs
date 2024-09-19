@@ -22,11 +22,11 @@ public class PacientesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Paciente>>> GetPacientes(){
+    public async Task<ActionResult<List<Paciente>>> Get(){
         try
         {
             var usuario = User.Identity.Name;
-            var res = await _context.Visita.Include(x=> x.Paciente).Where(x=> x.Enfermero.Email == usuario).Select(x=> x.Paciente).ToListAsync();
+            var res = await _context.Paciente.AsNoTracking().ToListAsync();
             return Ok(res);
         }
         catch (Exception ex)
@@ -34,4 +34,55 @@ public class PacientesController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpGet("Atendidos")]
+    public async Task<ActionResult<List<Paciente>>> GetAtendidos(){
+        try
+        {
+            var usuario = User.Identity.Name;
+            var res = await _context.Visita.AsNoTracking()
+            .Where(x=> x.Enfermero.Email == usuario)
+            .Select(x=> x.Paciente)
+            .Distinct()
+            .ToListAsync();
+            return Ok(res);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("Buscar/{nombre}")]
+    public async Task<ActionResult<List<Paciente>>> GetBuscar(string nombre){
+        try
+        {
+            var usuario = User.Identity.Name;
+            var res = await _context.Paciente.AsNoTracking().Where(x=> x.Nombre.Contains(nombre) || x.Apellido.Contains(nombre)).ToListAsync();
+            return Ok(res);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Post([FromForm] Paciente paciente){
+        try
+        {
+            if(ModelState.IsValid){
+                await _context.Paciente.AddAsync(paciente);
+                await _context.SaveChangesAsync();
+                return Ok(paciente);
+            }
+            return BadRequest(ModelState);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    
 }

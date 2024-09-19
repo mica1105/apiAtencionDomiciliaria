@@ -1537,11 +1537,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\ApiAtencionDomiciliaria.csproj",
+      "projectUniqueName": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\ApiAtencionDomiciliaria.csproj",
       "projectName": "ApiAtencionDomiciliaria",
-      "projectPath": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\ApiAtencionDomiciliaria.csproj",
+      "projectPath": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\ApiAtencionDomiciliaria.csproj",
       "packagesPath": "C:\\Users\\AMARI\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\obj\\",
+      "outputPath": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AMARI\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1608,7 +1608,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XtsLCDui/MEdDGRIYPrtYxsr1mVkvKgeO6OLZKzt3hEPH2rb7Xo22L1mHdTyPe24ltK84weGRE+1AriIF5pkMA==",
+  "dgSpecHash": "PlbmdClfPMh+VsxOyXj6gGokcdF6kdm3zeyf6BiT7fR8QMQ2GnekZlKV88loaDLnjP0p7M1yvJH85NobN/QHvw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\AMARI\\OneDrive\\Documentos\\3er Año\\Lab III\\ApiAtencionDomiciliaria\\ApiAtencionDomiciliaria.csproj",
+  "projectFilePath": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\ApiAtencionDomiciliaria.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AMARI\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.13\\microsoft.aspnetcore.authentication.jwtbearer.7.0.13.nupkg.sha512",
     "C:\\Users\\AMARI\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.10\\microsoft.aspnetcore.openapi.7.0.10.nupkg.sha512",

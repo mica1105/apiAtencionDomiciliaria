@@ -27,6 +27,8 @@ public class Visita
 	public DateOnly FechaCreacion { get; set; } 
 	[DataType(DataType.Date)]
 	public DateOnly FechaModificacion { get; set; }
+	[Required]
+	public string Prestaciones { get; set; } = "";
     public int PacienteId { get; set; }
 	[ForeignKey("PacienteId")]
     public Paciente? Paciente { get; set; }
