@@ -56,6 +56,11 @@ public class CsvsController : ControllerBase
             if(ModelState.IsValid){
                 var usuario = User.Identity.Name;
                 var visita = _context.Visita.AsNoTracking().Where(x=> x.Enfermero.Email == usuario && x.Id == csv.VisitaId).First();
+                if(visita == null){
+                    return NotFound("Visita no encontrada");
+                } 
+                visita.Estado = true;
+                _context.Visita.Update(visita);
                 csv.VisitaId = visita.Id;
                 _context.Csv.Add(csv);
                 await _context.SaveChangesAsync();

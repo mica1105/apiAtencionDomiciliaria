@@ -55,10 +55,19 @@ public class AdmDeFarmacosController : ControllerBase
         {
             if(ModelState.IsValid){
                 var usuario = User.Identity.Name;
-                admDeFarmacos.VisitaId = _context.Visita.AsNoTracking()
-                .Where(x=> x.Enfermero.Email == usuario && x.Id == admDeFarmacos.VisitaId)
-                .First().Id;
+                var visita = _context.Visita.FirstOrDefault(x => x.Enfermero.Email == usuario && x.Id == admDeFarmacos.VisitaId);
+
+                if (visita == null)
+                {
+                    return NotFound("Visita no encontrada.");
+                }
+
+                admDeFarmacos.VisitaId = visita.Id;
                 _context.AdmDeFarmacos.Add(admDeFarmacos);
+
+                // Actualizar el estado de la visita
+                visita.Estado = true;
+                _context.Visita.Update(visita);
                 await _context.SaveChangesAsync();
                 return Ok(admDeFarmacos);
             }

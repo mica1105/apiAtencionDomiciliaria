@@ -56,6 +56,11 @@ public class CuracionesController : ControllerBase
             if(ModelState.IsValid){
                 var usuario = User.Identity.Name;
                 var visita = _context.Visita.AsNoTracking().Where(x=> x.Enfermero.Email == usuario && x.Id == curacion.VisitaId).First();
+                if(visita == null){
+                    return NotFound("Visita no encontrada");
+                } 
+                visita.Estado = true;
+                _context.Visita.Update(visita);
                 curacion.VisitaId = visita.Id;
                 _context.Curacion.Add(curacion);
                 await _context.SaveChangesAsync();

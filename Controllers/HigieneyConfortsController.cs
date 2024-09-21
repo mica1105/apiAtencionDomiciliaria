@@ -55,6 +55,11 @@ public class HigieneyConfortsController : ControllerBase
             if(ModelState.IsValid){
                 var usuario = User.Identity.Name;
                 var visita = _context.Visita.AsNoTracking().Where(x=> x.Enfermero.Email == usuario && x.Id == higieneyConfort.VisitaId).First();
+                if(visita == null){
+                    return NotFound("Visita no encontrada");
+                } 
+                visita.Estado = true;
+                _context.Visita.Update(visita);
                 higieneyConfort.VisitaId = visita.Id;
                 _context.HigieneyConfort.Add(higieneyConfort);
                 await _context.SaveChangesAsync();

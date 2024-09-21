@@ -26,7 +26,25 @@ public class VisitasController : ControllerBase
         try
         {
             var usuario = User.Identity.Name;
-            var res = await _context.Visita.Where(x=> x.Enfermero.Email == usuario && x.FechaAtencion == fechaAtencion).ToListAsync();
+            var res = await _context.Visita.Include(x=> x.Paciente)
+            .Where(x=> x.Enfermero.Email == usuario && x.FechaAtencion == fechaAtencion)
+            .ToListAsync();
+            return Ok(res);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("cantidad/{fechaAtencion}")]
+    public async Task<ActionResult<int>> GetCantidad(DateOnly fechaAtencion){
+        try
+        {
+            var usuario = User.Identity.Name;
+            var res = await _context.Visita
+            .Where(x=> x.Enfermero.Email == usuario && x.Estado == false && x.FechaAtencion == fechaAtencion)
+            .CountAsync();
             return Ok(res);
         }
         catch (Exception ex)
@@ -75,6 +93,9 @@ public class VisitasController : ControllerBase
                 visita.EnfermeroId= _context.Enfermero.AsNoTracking()
                 .Where(x => x.Email == User.Identity.Name)
                 .First().Id;
+                if(visita.Estado){
+                    return BadRequest("La visita ya fue atendida no es posible modificarla");
+                }
                 _context.Visita.Update(visita);
                 await _context.SaveChangesAsync();
                 return Ok(visita);
@@ -93,6 +114,9 @@ public class VisitasController : ControllerBase
                 var visita = _context.Visita.AsNoTracking()
                 .Where(x => x.Enfermero.Email == User.Identity.Name && x.Id == id)
                 .First();
+                if(visita.Estado){
+                    return BadRequest("La visita ya fue atendida no es posible eliminarla");
+                }
                 _context.Visita.Remove(visita);
                 await _context.SaveChangesAsync();
                 return Ok("Visita "+ id +" eliminada");    
