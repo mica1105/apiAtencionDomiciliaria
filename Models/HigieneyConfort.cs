@@ -13,7 +13,7 @@ public class HigieneyConfort
 
     public string? Materiales { get; set; } = "";
     [Required]
-    public bool? Pañales { get; set; } = false;
+    public bool? Paniales { get; set; } = false;
     [Required]
     public bool? SondaVesical { get; set; } = false;
     [Required]

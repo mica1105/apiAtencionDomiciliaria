@@ -25,7 +25,7 @@ public class EnfermerosController : ControllerBase
 
     [HttpPost("Crear")]
     [AllowAnonymous]
-    public async Task<ActionResult> CrearEnfermero([FromForm] Enfermero enfermero){
+    public async Task<ActionResult> CrearEnfermero(Enfermero enfermero){
         try
         {
             if(ModelState.IsValid){
@@ -37,24 +37,10 @@ public class EnfermerosController : ControllerBase
 						numBytesRequested: 256 / 8
 					));
                 enfermero.Password=hashed;
+                enfermero.EstadoId=1;
+                enfermero.Avatar="/Uploads/porDefecto.jpg";
                 await _context.Enfermero.AddAsync(enfermero);
                 _context.SaveChanges();
-                if(enfermero.AvatarFile!=null && enfermero.Id !=0){
-                    string wwwRootPath = environment.WebRootPath;
-                    string path = Path.Combine(wwwRootPath, "Uploads");
-                    if(!Directory.Exists(path)){
-                        Directory.CreateDirectory(path);
-                    }
-                    string fileName ="enfermero"+enfermero.Id+ Path.GetExtension(enfermero.AvatarFile.FileName);
-                    string pathCompleto = Path.Combine(path, fileName);
-                    using(var fileStream = new FileStream(pathCompleto, FileMode.Create)){
-                        await enfermero.AvatarFile.CopyToAsync(fileStream);
-                    }
-                    enfermero.Avatar=Path.Combine("/Uploads", fileName);
-                    _context.Enfermero.Update(enfermero);
-                    await _context.SaveChangesAsync();
-                    
-                }
                 return CreatedAtAction(nameof(CrearEnfermero), new {id=enfermero.Id},enfermero);
             }
             return BadRequest(ModelState);
@@ -66,6 +52,58 @@ public class EnfermerosController : ControllerBase
         }
     }
 
+    [HttpPost("EditarAvatar")]
+    public async Task<ActionResult<Enfermero>> EditarAvatar([FromForm] IFormFile imageFile)
+    {
+        try
+        {
+            if (imageFile != null)
+            {
+                var usuario = _context.Enfermero.SingleOrDefault(x => x.Email == User.Identity.Name);
+
+                if (usuario == null)
+                {
+                    return NotFound("Usuario no encontrado.");
+                }
+
+                string wwwRootPath = environment.WebRootPath;
+                string path = Path.Combine(wwwRootPath, "Uploads");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                string fileName = "enfermero" + usuario.Id + Path.GetExtension(imageFile.FileName);
+                string pathCompleto = Path.Combine(path, fileName);
+
+                // Si el archivo ya existe, eliminarlo
+                if (System.IO.File.Exists(pathCompleto))
+                {
+                    System.IO.File.Delete(pathCompleto);
+                }
+
+                // Guardar el nuevo archivo
+                using (var fileStream = new FileStream(pathCompleto, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(fileStream);
+                }
+
+                var url = Path.Combine("/Uploads", fileName);
+                usuario.Avatar = url;
+                _context.SaveChanges();
+
+                return Ok(usuario);
+            }
+            return BadRequest("No se ha subido ningún archivo.");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpGet("{id}")]
+    
     [HttpPost("Login")]
     [AllowAnonymous]
 	public async Task<IActionResult> Login([FromForm] LoginView loginView)
@@ -108,7 +146,7 @@ public class EnfermerosController : ControllerBase
 
 				return Ok(new JwtSecurityTokenHandler().WriteToken(token));
 			}
-			return BadRequest();
+			return BadRequest(ModelState);
 		}
 		catch (Exception ex)
 		{

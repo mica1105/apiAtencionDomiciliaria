@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3OGmUj4ojoLBzCbRWcxMBi/Gw4KdWA4k9+B5c8np9lY=",
+  "Hash": "SZ9xDhfHBHRIkd2uX2UXTz7vg5ExBqxV89gw1OYlAkc=",
   "Source": "ApiAtencionDomiciliaria",
   "BasePath": "_content/ApiAtencionDomiciliaria",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\Uploads\\enfermero6.jpeg",
+      "Identity": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\Uploads\\enfermero6.jpg",
       "SourceId": "ApiAtencionDomiciliaria",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\",
       "BasePath": "_content/ApiAtencionDomiciliaria",
-      "RelativePath": "Uploads/enfermero6.jpeg",
+      "RelativePath": "Uploads/enfermero6.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,7 +31,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\enfermero6.jpeg"
+      "OriginalItemSpec": "wwwroot\\Uploads\\enfermero6.jpg"
     },
     {
       "Identity": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\Uploads\\enfermero7.jpeg",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\enfermero7.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\Uploads\\porDefecto.jpg",
+      "SourceId": "ApiAtencionDomiciliaria",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\AMARI\\OneDrive\\Escritorio\\Proyecto Atencion Domiciliaria\\apiAtencionDomiciliaria\\wwwroot\\",
+      "BasePath": "_content/ApiAtencionDomiciliaria",
+      "RelativePath": "Uploads/porDefecto.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\porDefecto.jpg"
     }
   ]
 }

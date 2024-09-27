@@ -23,6 +23,8 @@ public class CsvsController : ControllerBase
         {
             var usuario = User.Identity.Name;
             var res = await _context.Csv.AsNoTracking()
+            .Include(x=> x.Visita)
+            .ThenInclude(x=> x.Paciente)
             .Where(x=> x.Visita.Enfermero.Email == usuario)
             .ToListAsync();
             return Ok(res);
@@ -36,10 +38,12 @@ public class CsvsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Csv>> Get(int id){
         try
-        {
+        {   
             var usuario = User.Identity.Name;
             var res = await _context.Csv.AsNoTracking()
-            .Where(x=> x.Visita.Enfermero.Email == usuario && x.VisitaId == id)
+            .Include(x=> x.Visita)
+            .ThenInclude(x=> x.Paciente)
+            .Where(x=> x.Visita.Enfermero.Email == usuario && x.Id == id)
             .FirstOrDefaultAsync();
             return Ok(res);
         }
@@ -49,6 +53,7 @@ public class CsvsController : ControllerBase
         }
     }
 
+
     [HttpPost]
     public async Task<ActionResult> Post(Csv csv){
         try
@@ -56,11 +61,15 @@ public class CsvsController : ControllerBase
             if(ModelState.IsValid){
                 var usuario = User.Identity.Name;
                 var visita = _context.Visita.AsNoTracking().Where(x=> x.Enfermero.Email == usuario && x.Id == csv.VisitaId).First();
+                
                 if(visita == null){
                     return NotFound("Visita no encontrada");
                 } 
+
                 visita.Estado = true;
+                visita.FechaModificacion = DateOnly.FromDateTime(DateTime.Now);
                 _context.Visita.Update(visita);
+
                 csv.VisitaId = visita.Id;
                 _context.Csv.Add(csv);
                 await _context.SaveChangesAsync();
@@ -74,11 +83,15 @@ public class CsvsController : ControllerBase
         }
     }
 
-    [HttpPut("{id}")]
-    public async Task<ActionResult> Put(int id, Csv csv){
+    [HttpPut]
+    public async Task<ActionResult> Put(Csv csv){
         try
         {
-            if(ModelState.IsValid && _context.Csv.AsNoTracking().FirstOrDefault(X => X.Id == id && X.Visita.Enfermero.Email == User.Identity.Name) != null){
+            if(ModelState.IsValid && _context.Csv.AsNoTracking().FirstOrDefault(X => X.Id == csv.Id && X.Visita.Enfermero.Email == User.Identity.Name) != null){
+                var visita= _context.Visita
+                .Include(x=> x.Paciente)
+                .FirstOrDefault(x => x.Enfermero.Email == User.Identity.Name && x.Id == csv.VisitaId);
+                csv.Visita = visita;
                 _context.Csv.Update(csv);
                 await _context.SaveChangesAsync();
                 return Ok(csv);

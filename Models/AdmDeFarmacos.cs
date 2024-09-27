@@ -13,7 +13,7 @@ public class AdmDeFarmacos
     public string? Medicacion { get; set; } = "";
     public string? Ra { get; set; } = "";
     [Required]
-    public double Dosis { get; set; }
+    public float Dosis { get; set; }
     public string? Observaciones { get; set; } = "";
     [Required]
     public int VisitaId { get; set; }

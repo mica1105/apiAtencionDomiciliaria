@@ -68,9 +68,16 @@ public class VisitasController : ControllerBase
         }
     }
 
-    [HttpPost]
-    public async Task<ActionResult> Post(Visita visita){
+    [HttpPost("{fechaAtencion}")]
+    public async Task<ActionResult> Post(Visita visita, string fechaAtencion){
         try{
+            if (!visita.FechaAtencion.HasValue)
+            {
+                DateOnly fecha = DateOnly.ParseExact(fechaAtencion, "dd-MM-yyyy");
+                visita.FechaAtencion = fecha;
+                visita.FechaCreacion = DateOnly.FromDateTime(DateTime.Now);
+                visita.FechaModificacion = DateOnly.FromDateTime(DateTime.Now);
+            }
             if(ModelState.IsValid){
                 var usuario = User.Identity.Name;
                 visita.EnfermeroId= _context.Enfermero.AsNoTracking().Where(x => x.Email == usuario).First().Id;
@@ -86,13 +93,14 @@ public class VisitasController : ControllerBase
         }
     }
 
-    [HttpPut("{id}")]
-    public async Task<ActionResult> Put(int id,Visita visita){
+    [HttpPut]
+    public async Task<ActionResult> Put(Visita visita){
         try{
-            if(ModelState.IsValid && _context.Visita.AsNoTracking().FirstOrDefault(X=> X.Id == id) != null){
+            if(ModelState.IsValid && _context.Visita.AsNoTracking().FirstOrDefault(X=> X.Id == visita.Id) != null){
                 visita.EnfermeroId= _context.Enfermero.AsNoTracking()
                 .Where(x => x.Email == User.Identity.Name)
                 .First().Id;
+                visita.FechaModificacion = DateOnly.FromDateTime(DateTime.Now);
                 if(visita.Estado){
                     return BadRequest("La visita ya fue atendida no es posible modificarla");
                 }
@@ -119,7 +127,7 @@ public class VisitasController : ControllerBase
                 }
                 _context.Visita.Remove(visita);
                 await _context.SaveChangesAsync();
-                return Ok("Visita "+ id +" eliminada");    
+                return Ok(visita);    
             }
             return NotFound();
         }

@@ -23,6 +23,8 @@ public class AdmDeFarmacosController : ControllerBase
         {
             var usuario = User.Identity.Name;
             var res = await _context.AdmDeFarmacos.AsNoTracking()
+            .Include(x=> x.Visita)
+            .ThenInclude(x=> x.Paciente)
             .Where(x=> x.Visita.Enfermero.Email == usuario)
             .ToListAsync();
             return Ok(res);
@@ -39,6 +41,8 @@ public class AdmDeFarmacosController : ControllerBase
         {   
             var usuario = User.Identity.Name;
             var res = await _context.AdmDeFarmacos.AsNoTracking()
+            .Include(x=> x.Visita)
+            .ThenInclude(x=> x.Paciente)
             .Where(x=> x.Visita.Enfermero.Email == usuario && x.Id == id)
             .FirstOrDefaultAsync();
             return Ok(res);
@@ -67,6 +71,7 @@ public class AdmDeFarmacosController : ControllerBase
 
                 // Actualizar el estado de la visita
                 visita.Estado = true;
+                visita.FechaModificacion = DateOnly.FromDateTime(DateTime.Now);
                 _context.Visita.Update(visita);
                 await _context.SaveChangesAsync();
                 return Ok(admDeFarmacos);
@@ -79,11 +84,15 @@ public class AdmDeFarmacosController : ControllerBase
         }
     }
 
-    [HttpPut("{id}")]
-    public async Task<ActionResult> Put(int id,AdmDeFarmacos admDeFarmacos){
+    [HttpPut]
+    public async Task<ActionResult> Put(AdmDeFarmacos admDeFarmacos){
         try
         {
-            if(ModelState.IsValid && _context.AdmDeFarmacos.AsNoTracking().FirstOrDefault(X => X.Id == id && X.Visita.Enfermero.Email == User.Identity.Name) != null){
+            if(ModelState.IsValid && _context.AdmDeFarmacos.AsNoTracking().FirstOrDefault(X => X.Id == admDeFarmacos.Id && X.Visita.Enfermero.Email == User.Identity.Name) != null){
+                var visita= _context.Visita
+                .Include(x=> x.Paciente)
+                .FirstOrDefault(x => x.Enfermero.Email == User.Identity.Name && x.Id == admDeFarmacos.VisitaId);
+                admDeFarmacos.Visita = visita;
                 _context.AdmDeFarmacos.Update(admDeFarmacos);
                 await _context.SaveChangesAsync();
                 return Ok(admDeFarmacos);

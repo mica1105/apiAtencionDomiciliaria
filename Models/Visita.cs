@@ -12,16 +12,14 @@ public class Visita
 		
 	[Key]
 	public int Id { get; set; }
-	[Required]
 	[DataType(DataType.Date)]
-	public DateOnly FechaAtencion { get; set; } 
+	public DateOnly? FechaAtencion { get; set; } 
 	[Required]
 	[DataType(DataType.Time)]
 	public TimeOnly InicioAtencion { get; set; }
     [Required]
 	[DataType(DataType.Time)]
 	public TimeOnly FinAtencion { get; set; }
-	[Required]
 	public bool Estado {get; set;}
     [DataType(DataType.Date)]
 	public DateOnly FechaCreacion { get; set; } 
@@ -35,4 +33,9 @@ public class Visita
     public int EnfermeroId { get; set; }
 	[ForeignKey("EnfermeroId")]
     public Enfermero? Enfermero { get; set; }
+
+    public static implicit operator Visita(Task<Visita?> v)
+    {
+        throw new NotImplementedException();
+    }
 }

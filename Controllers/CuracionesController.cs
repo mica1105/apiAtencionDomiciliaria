@@ -23,6 +23,8 @@ public class CuracionesController : ControllerBase
         {
             var usuario = User.Identity.Name;
             var res = await _context.Curacion.AsNoTracking()
+            .Include(x=> x.Visita)
+            .ThenInclude(x=> x.Paciente)
             .Where(x=> x.Visita.Enfermero.Email == usuario)
             .ToListAsync();
             return Ok(res);
@@ -36,10 +38,12 @@ public class CuracionesController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Curacion>> Get(int id){
         try
-        {
+        {   
             var usuario = User.Identity.Name;
             var res = await _context.Curacion.AsNoTracking()
-            .Where(x=> x.Visita.Enfermero.Email == usuario && x.VisitaId == id)
+            .Include(x=> x.Visita)
+            .ThenInclude(x=> x.Paciente)
+            .Where(x=> x.Visita.Enfermero.Email == usuario && x.Id == id)
             .FirstOrDefaultAsync();
             return Ok(res);
         }
@@ -56,11 +60,15 @@ public class CuracionesController : ControllerBase
             if(ModelState.IsValid){
                 var usuario = User.Identity.Name;
                 var visita = _context.Visita.AsNoTracking().Where(x=> x.Enfermero.Email == usuario && x.Id == curacion.VisitaId).First();
+
                 if(visita == null){
                     return NotFound("Visita no encontrada");
                 } 
+                
                 visita.Estado = true;
+                visita.FechaModificacion = DateOnly.FromDateTime(DateTime.Now);
                 _context.Visita.Update(visita);
+                
                 curacion.VisitaId = visita.Id;
                 _context.Curacion.Add(curacion);
                 await _context.SaveChangesAsync();
@@ -93,14 +101,16 @@ public class CuracionesController : ControllerBase
         }
     }
 
-    [HttpPut("{id}")]
-    public async Task<ActionResult> Put(int id, Curacion curacion){
+    [HttpPut]
+    public async Task<ActionResult> Put( Curacion curacion){
         try
         {
-            if(ModelState.IsValid && _context.Curacion.AsNoTracking().FirstOrDefault(X => X.Id == id && X.Visita.Enfermero.Email == User.Identity.Name) != null){
+            if(ModelState.IsValid && _context.Visita.AsNoTracking().FirstOrDefault(X => X.Enfermero.Email == User.Identity.Name) != null){
                 var usuario = User.Identity.Name;
-                var visita = _context.Visita.AsNoTracking().Where(x=> x.Enfermero.Email == usuario && x.Id == curacion.VisitaId).First();
-                curacion.VisitaId = visita.Id;
+                var visita= _context.Visita
+                .Include(x=> x.Paciente)
+                .FirstOrDefault(x => x.Enfermero.Email == User.Identity.Name && x.Id == curacion.VisitaId);
+                curacion.Visita = visita;
                 _context.Curacion.Update(curacion);
                 await _context.SaveChangesAsync();
                 return Ok(curacion);

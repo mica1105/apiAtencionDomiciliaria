@@ -12,7 +12,7 @@ public class Curacion {
     [Required]
     public string? Clase { get; set; } = "";
     [Required]
-    public decimal? Tamaño { get; set; } = 0;
+    public float? Tamanio { get; set; } = 0;
     [Required]
     public string? Bordes { get; set; } = "";
     [Required]

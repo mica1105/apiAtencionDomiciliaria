@@ -25,7 +25,7 @@ public class HCController : ControllerBase
     public async Task<ActionResult> Get(int id){
         try
         {
-            var res = await _context.HC.SingleOrDefaultAsync(x => x.PacienteId == id);
+            var res = await _context.HC.Include(x => x.Paciente).SingleOrDefaultAsync(x => x.PacienteId == id);
             return Ok(res);
         }
         catch (Exception ex)
