@@ -31,4 +31,9 @@ La base de datos del proyecto **Holística Atención Domiciliaria** incluye las 
 
 ![Captura de base de datos](https://github.com/user-attachments/assets/11b72898-2705-43b4-9fc0-95259230ac39)
 
+## Repositorio de la aplicación móvil
+
+Puedes acceder al repositorio de la aplicación móvil [aquí](https://github.com/mica1105/AppMovil_AtencionDomiciliaria.git).
+
+
 
